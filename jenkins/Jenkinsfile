@@ -1,6 +1,8 @@
 pipeline{
     agent any
     environment {
+        MOUDLE_HOME="demo/"
+        
         NEXUS_VERSION = "nexus"
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "nexus:8081/nexus"
@@ -10,26 +12,24 @@ pipeline{
     stages {
         stage('Clone sources') {
             steps {
-                git branch: "master",  url: 'https://github.com/Lucas2738/demo.git'
+                git branch: "master",  url: 'https://github.com/Lucas2738/complete.git'
             }
         }
         stage ('Compile Stage') {
             steps {
-                sh 'mvn package -DskipTests=true'
+                sh 'mvn package -DskipTests=true -f ./${MOUDLE_HOME}pom.xml' 
             }
         }
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh "mvn clean verify sonar:sonar -DskipTests=true -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=122667c0024c94cf4ec71052117c8e8f654872b4"
-                }
+                sh "mvn clean verify sonar:sonar -DskipTests=true -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=1abf6a6e37ae83d92db8c10e6befc8e21d734d5c -f ./${MOUDLE_HOME}pom.xml"
             }
         }
         stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
-                    pom = readMavenPom file: "pom.xml";
-                    filesByGlob = findFiles(glob: "**/*demo-0.0.2-SNAPSHOT.${pom.packaging}*");
+                    pom = readMavenPom file: "${MOUDLE_HOME}pom.xml";
+                    filesByGlob = findFiles(glob: "${MOUDLE_HOME}target/*.${pom.packaging}");
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                     artifactPath = filesByGlob[0].path;
                     artifactExists = fileExists artifactPath;
