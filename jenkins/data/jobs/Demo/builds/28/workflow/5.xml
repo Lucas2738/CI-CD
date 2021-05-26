@@ -1,0 +1,32 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@3.8">
+  <node class="cps.n.StepStartNode" plugin="workflow-cps@2.92">
+    <parentIds>
+      <string>4</string>
+    </parentIds>
+    <id>5</id>
+    <descriptorId>org.jenkinsci.plugins.workflow.steps.EnvStep</descriptorId>
+  </node>
+  <actions>
+    <s.a.LogStorageAction/>
+    <cps.a.ArgumentsActionImpl plugin="workflow-cps@2.92">
+      <arguments>
+        <entry>
+          <string>overrides</string>
+          <list>
+            <string>NEXUS_PROTOCOL=http</string>
+            <string>NEXUS_REPOSITORY=/releases/</string>
+            <string>NEXUS_VERSION=nexus</string>
+            <string>NEXUS_URL=127.0.0.1:7081/nexus/content/</string>
+            <string>NEXUS_CREDENTIAL_ID=nexus</string>
+          </list>
+        </entry>
+      </arguments>
+      <sensitiveVariables/>
+      <isUnmodifiedBySanitization>true</isUnmodifiedBySanitization>
+    </cps.a.ArgumentsActionImpl>
+    <wf.a.TimingAction plugin="workflow-api@2.42">
+      <startTime>1622019582560</startTime>
+    </wf.a.TimingAction>
+  </actions>
+</Tag>

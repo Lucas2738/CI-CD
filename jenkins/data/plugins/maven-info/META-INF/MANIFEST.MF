@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: olamy
+Build-Jdk: 11.0.11
+Extension-Name: maven-info
+Specification-Title: The Jenkins Plugins Parent POM Project
+Implementation-Title: maven-info
+Implementation-Version: 0.3.0
+Plugin-Class: jenkins.plugins.maveninfo.MavenInfoPlugin
+Group-Id: org.tomfolga
+Short-Name: maven-info
+Long-Name: Jenkins Maven Info Plugin
+Url: https://wiki.jenkins-ci.org/display/JENKINS/Maven+Info+Plugin
+Minimum-Java-Version: 1.8
+Plugin-Version: 0.3.0
+Hudson-Version: 2.270
+Jenkins-Version: 2.270
+Plugin-Dependencies: maven-plugin:3.10,token-macro:2.13
+Plugin-Developers: Tom Folga:tomfolga:tomfolga@gmail.com,Olivier Lamy:
+ olamy:olamy@apache.org,Emlio Jose Mena Cebrian:emenaceb:emenaceb@gmai
+ l.com
+Plugin-ScmUrl: https://github.com/jenkinsci/maven-info-plugin
+

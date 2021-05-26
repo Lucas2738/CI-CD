@@ -1,0 +1,10 @@
+commit 04d36ded94e10652f4527f944b861bbc546edfa0
+tree b0da3471deecbeab9d000eae90cbccb0d5a0afe7
+parent 1562a2639791c3b4536b27170fc67c308bee95b5
+author Luca Cirillo <luca.cirillo@sisal.it> 2021-05-26 11:17:14 +0200
+committer Luca Cirillo <luca.cirillo@sisal.it> 2021-05-26 11:17:14 +0200
+
+    kafka
+
+
+:100755 100755 fad12e3fba063e4c2c63e0863cfab43687614683 4e2ee0ef0b5752150ed9f51401152279d65a93a0 M	pom.xml

@@ -1,0 +1,65 @@
+pipeline{
+    agent any
+    environment {
+        NEXUS_VERSION = "nexus"
+        NEXUS_PROTOCOL = "http"
+        NEXUS_URL = "nexus:8081/nexus"
+        NEXUS_REPOSITORY = "snapshots/"
+        NEXUS_CREDENTIAL_ID = "nexus"
+    }
+    stages {
+        stage('Clone sources') {
+            steps {
+                git branch: "master",  url: 'https://github.com/Lucas2738/demo.git'
+            }
+        }
+        stage ('Compile Stage') {
+            steps {
+                sh 'mvn package -DskipTests=true'
+            }
+        }
+        stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh "mvn clean verify sonar:sonar -DskipTests=true -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=122667c0024c94cf4ec71052117c8e8f654872b4"
+                }
+            }
+        }
+        stage("Publish to Nexus Repository Manager") {
+            steps {
+                script {
+                    pom = readMavenPom file: "pom.xml";
+                    filesByGlob = findFiles(glob: "**/*demo-0.0.2-SNAPSHOT.${pom.packaging}*");
+                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                    artifactPath = filesByGlob[0].path;
+                    artifactExists = fileExists artifactPath;
+                    if(artifactExists) {
+                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                        nexusArtifactUploader(
+                            nexusVersion: NEXUS_VERSION,
+                            protocol: NEXUS_PROTOCOL,
+                            nexusUrl: NEXUS_URL,
+                            groupId: pom.groupId,
+                            version: pom.version,
+                            repository: NEXUS_REPOSITORY,
+                            credentialsId: NEXUS_CREDENTIAL_ID,
+                            artifacts: [
+                                [artifactId: pom.artifactId,
+                                classifier: '',
+                                file: artifactPath,
+                                type: pom.packaging],
+                                [artifactId: pom.artifactId,
+                                classifier: '',
+                                file: "pom.xml",
+                                type: "jar"]
+                            ]
+                        );
+                    } else {
+                        error "*** File: ${artifactPath}, could not be found";
+                    }
+                }
+            }
+        }
+        
+    } 
+}
