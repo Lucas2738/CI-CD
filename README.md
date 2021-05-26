@@ -3,9 +3,7 @@
 # 1 - Build Jenkins image
 - docker build -t jenkins/jenkins-maven:latest .
 
-# 2 - Run ./docker-master-build.sh
-
-# 3 - Setup
+# 2 - Setup
 - Access to nexus with username: admin and password: admin123
 - Access sonarqube with username: admin and password: admin than change password to: admin123 then click on My Account/Security insert jenkins in Generate Tokens and click generate (copy token that will be used in jenkins pipeline)
 - Access jenkins with password recovered from CI-CD/jenkins/data/secrets/initialAdminPassword and install following plugins:
@@ -15,6 +13,7 @@
 	- Install Nexus Artifact Uploader plugin
 	- Add credential in Manage jenkins/Manage Credentials/Jenkins/Global credentials (unrestricted)/Add Credentials ad insert username:admin password:admin123 id:nexus
 
+# 3 - Pipeline
 - New Item
 - Enter "Demo" as item name 
 - Select "Pipeline"
