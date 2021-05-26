@@ -1,19 +1,0 @@
-~ÿÇ® š/SYSTEMBOOT"$
-date2021-05-25 15:01:36.894+0000"
-actionBOOT"1
-message&Started Nexus (version 2.14.20-02 OSS)›‘¯Å š/AUTHC_AUTHZAUTHC"$
-date2021-05-25 15:07:50.544+0000"
-actionAUTHC"G
-message<Unable to authenticate user [admin] from IP address 10.0.0.2›ˆËÅ š/AUTHC_AUTHZAUTHC"$
-date2021-05-25 15:07:54.120+0000"
-actionAUTHC"G
-message<Unable to authenticate user [admin] from IP address 10.0.0.2›â‹Æ š/AUTHC_AUTHZAUTHC"$
-date2021-05-25 15:08:02.401+0000"
-actionAUTHC"G
-message<Unable to authenticate user [nexus] from IP address 10.0.0.2›«ÀÎ š/AUTHC_AUTHZAUTHC"$
-date2021-05-25 15:10:20.202+0000"
-actionAUTHC"G
-message<Unable to authenticate user [admin] from IP address 10.0.0.2÷ÃÐ š/SYSTEMBOOT"$
-date2021-05-25 15:10:53.431+0000"
-actionBOOT"2
-message'Stopping Nexus (version 2.14.20-02 OSS)
