@@ -6,7 +6,7 @@
 # 2 - Setup
 - Access to nexus with username: admin and password: admin123
 - Access sonarqube with username: admin and password: admin than change password to: admin123 then click on My Account/Security insert jenkins in Generate Tokens and click generate (copy token that will be used in jenkins pipeline)
-- Access jenkins with password recovered from CI-CD/jenkins/data/secrets/initialAdminPassword and install following plugins:
+- Access jenkins with password recovered from /var/jenkins_home/secrets/initialAdminPassword and install following plugins:
 	- Install suggested plugin
 	- Create user with username: admin and password admin123
 	- Install pipeline-utility-steps plugin

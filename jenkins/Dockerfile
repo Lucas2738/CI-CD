@@ -2,12 +2,14 @@ FROM jenkins/jenkins:lts-jdk11
 
 USER root
 
+ENV MAVEN_VERSION=3.8.4
+ENV MVN_REPO_URL=https://dlcdn.apache.org/maven/maven-3
 
-RUN wget https://www-us.apache.org/dist/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz -P /tmp
-RUN tar xzf /tmp/apache-maven-3.8.1-bin.tar.gz -C /opt/
-RUN ln -s /opt/apache-maven-3.8.1/bin/mvn /usr/local/bin
-RUN chown -R jenkins:jenkins /opt/apache-maven-3.8.1
-ENV MAVEN_HOME /opt/apache-maven-3.8.1
 
-USER jenkins
+RUN curl -L >apache-maven-${MAVEN_VERSION}-bin.tar.gz ${MVN_REPO_URL}/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+RUN tar xzf /apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /opt/
+
+RUN chown -R jenkins:jenkins /opt/apache-maven-${MAVEN_VERSION}
+ENV MAVEN_HOME /opt/apache-maven-${MAVEN_VERSION}
+
 

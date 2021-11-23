@@ -14,7 +14,6 @@ services:
     networks:
       - cicd-net
     volumes:
-      - ./jenkins/data:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
 
   sonarqube:
@@ -28,12 +27,6 @@ services:
       - sonar.jdbc.username=sonar
       - sonar.jdbc.password=sonar
 
-    volumes:
-      - ./sonarqube/data/conf:/opt/sonarqube/conf
-      - ./sonarqube/data/data:/opt/sonarqube/data
-      - ./sonarqube/data/extensions:/opt/sonarqube/extensions
-      - ./sonarqube/data/bundled_plugins:/opt/sonarqube/lib/bundled-plugins
-
   db:
     image: postgres
     networks:
@@ -41,19 +34,14 @@ services:
     environment:
       - POSTGRES_USER=sonar
       - POSTGRES_PASSWORD=sonar
-    volumes:
-      - ./postgresql/data:/var/lib/postgresql
-      - ./postgresql/data/data:/var/lib/postgresql/data
 
   nexus:
     image: sonatype/nexus
     networks:
       - cicd-net
-    volumes:
-      - ./nexus/data:/sonatype-work
     ports:
       - "7081:8081"
 
 networks:
   cicd-net:
-    driver: overlay
+    driver: bridge
