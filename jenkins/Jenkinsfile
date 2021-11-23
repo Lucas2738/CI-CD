@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment {
         MOUDLE_HOME="demo/"
-        
+        MVN="/opt/apache-maven-3.8.4/bin/mvn"
         NEXUS_VERSION = "nexus"
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "nexus:8081/nexus"
@@ -17,12 +17,12 @@ pipeline{
         }
         stage ('Compile Stage') {
             steps {
-                sh 'mvn package -DskipTests=true -f ./${MOUDLE_HOME}pom.xml' 
+                sh "${MVN} package -DskipTests=true -f ./${MOUDLE_HOME}pom.xml" 
             }
         }
         stage('SonarQube analysis') {
             steps {
-                sh "mvn clean verify sonar:sonar -DskipTests=true -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=1abf6a6e37ae83d92db8c10e6befc8e21d734d5c -f ./${MOUDLE_HOME}pom.xml"
+                sh "${MVN} clean verify sonar:sonar -DskipTests=true -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=b38ebaa971415340b7ef8854fc4791b1808a7432 -f ./${MOUDLE_HOME}pom.xml"
             }
         }
         stage("Publish to Nexus Repository Manager") {
