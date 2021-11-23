@@ -12,4 +12,6 @@ RUN tar xzf /apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /opt/
 RUN chown -R jenkins:jenkins /opt/apache-maven-${MAVEN_VERSION}
 ENV MAVEN_HOME /opt/apache-maven-${MAVEN_VERSION}
 
+USER jenkins
+
 
